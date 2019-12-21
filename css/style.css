@@ -1249,6 +1249,10 @@ p.comment-form-email, p.comment-form-author, p.comment-form-url {
   -o-transition: all ease .5s;
   transition: all ease .5s;
 }
+@media (max-width: 767px) {
+  .content_close{top: 6px;right: 6px;}
+  .content_close i{font-size: 1.5em;}
+}
 
 .content_close i:hover {
   -webkit-transform: rotate(-180deg);
@@ -1258,13 +1262,22 @@ p.comment-form-email, p.comment-form-author, p.comment-form-url {
   transform: rotate(-180deg);
 }
 
-#menu_gallery{height: 100%; display: flex;flex-direction:column; justify-content: center;}
-#full_img {height: 80%; flex: 0 0 auto; overflow: hidden; display: flex; justify-content: center;align-items: center;}
-#full_img img {height: 100%;}
+.galery_lx{height: 100%; display: flex;flex-direction:column; justify-content: center;}
+.galery_lx .slide{display: none; position: absolute; width: 30px; height: 30px;top: calc(50% - 15px); font-size: 2.2em; color: #fff; opacity: .5;}
+.galery_lx .slide i {cursor: pointer;}
+.galery_lx .slide.slide_prev {left: 10px;}
+.galery_lx .slide.slide_next {right: 20px;}
+.galery_lx .full_img {height: 80%; flex: 0 0 auto; overflow: hidden; display: flex; justify-content: center;align-items: center;}
+.galery_lx .full_img img {height: 100%;}
 
-#small_scroller {margin-top: 10px; padding-top:10px; overflow: hidden; flex: 0 0 90px; display: flex;}
-#small_scroller .small_container {position:relative; display: flex;}
-#small_scroller .small_container .img_content{position: relative;}
-#small_scroller .small_container .img_content img {padding: 3px; height: 100%; width: auto; cursor: pointer;}
+.galery_lx .small_scroller {margin-top: 10px; padding-top:10px; overflow: hidden; flex: 0 0 90px; display: flex;}
+.galery_lx .small_scroller .small_container {position:relative; display: flex;}
+.galery_lx .small_scroller .small_container .img_content{position: relative;}
+.galery_lx .small_scroller .small_container .img_content img {padding: 3px; height: 100%; width: auto; cursor: pointer;}
+@media (max-width: 767px) {
+  .galery_lx .small_scroller{display: none;}
+  .galery_lx .full_img {height: 100%;flex: 1 1 auto;}
+  .galery_lx .slide {display: block;}
+}
 
 /*end LYNX*/
