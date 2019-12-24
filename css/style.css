@@ -1281,7 +1281,17 @@ p.comment-form-email, p.comment-form-author, p.comment-form-url {
 }
 
 /*delivery*/
-
+/* #delivery_page .delivery_content .delivery_selection .delivery_menu*/
+#delivery_page {display: block;position: fixed; top: 0; left: 0; width: 100vw;height: 100vh;padding: 20px 0px 20px 10px;background: #fff;box-sizing: border-box;}
+#delivery_page .delivery_content {display: grid;grid-template-columns: 3fr 1fr;}
+.delivery_menu {display: grid;}
+.delivery_selection, .delivery_cart {padding: 1em;}
+.delivery_page {width: 100%;}
+.delivery_page .delivery_product_list {display:none;grid-template-columns: repeat(4,1fr); grid-gap: 10px;overflow-y: auto;}
+.delivery_page .delivery_product_list.active_tab{display:grid;}
+.product_card {display: block; padding: 5px; border: 1px dashed #949b9e;}
+.product_card h3 {text-transform: uppercase; text-align: center; font-weight: 700; color: #130c07;margin-bottom: 5px;}
+.product_card img {width: 100%; height: 150px;}
 
 /*end delivery*/
 
