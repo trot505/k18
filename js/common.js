@@ -1,5 +1,5 @@
-//////CONTACT FORM VALIDATION
 $(document).ready(function() {
+	//CONTACT FORM VALIDATION
 	//if submit button is clicked
 	$('#submit').click(function () {		
 		
@@ -97,14 +97,18 @@ $(document).ready(function() {
 		e.preventDefault();
 		$.post('/menu/menu.php',{id:'menu_gallery'}, function (data) {
 			let ret = $.parseJSON(data);
-			$('#content_load .content').html(ret.html);
-			
+			let lx_html = ret.html;
+			back_content(e, lx_html);
+				$('#content_load .content').html(ret.html);
+
+				
 			setTimeout(function () {
-				$('#content_load').addClass('active');
+				//$('#content_load').addClass('active');
 				setTimeout(function () {
 					slider_img('#menu_gallery');
 				},100);
 			},300);
+		
 		});
 		
 	});
@@ -207,7 +211,7 @@ let slider_img = function (id) {
 		src_i = src_i.replace('small','full');
 		$(img_arr[i]).removeClass('active_img');
 		$(img_arr[add_c]).addClass('active_img');
-		console.log(src_i + ' i - ' + i + ' add_c-' + add_c);
+		
 		full_img.animate({opacity: 0}, fadeSpeed,'easeInOutQuad',function () {
 			$(this).attr('src', src_i);
 			setTimeout(function () {
@@ -223,10 +227,45 @@ let slider_img = function (id) {
 		$('body').addClass('loaded')
 	}, 1000);
 	
+	let back_content = function (el, lx_html = ''){
+		let content = '<div id="content_load"><div class="content_close"><i class="far fa-times-circle"></i></div><div class="content">' + lx_html + '</div></div>';
+		let с = getPosition(el);
+		let back = $('#back_content');
+		let width = back.width();
+		back.css({
+				'top' : с.y,
+				'left' : с.x,
+			})
+		setTimeout(function () {
+			back.toggleClass('active_back');
+			if (back.hasClass('active_back')){
+				$('body').addClass('overflow_hidden');
+				setTimeout(function () {
+					back.html(content);
+				},600);
+			} else {
+				back.empty();
+				$('body').removeClass('overflow_hidden');
+			}
+		},100)
+		
+		
+	};
 	
-	
-	
-	
+	let getPosition = function (e){
+		let x = y = 0;
+		if (!e) {
+			let e = window.event;
+		}
+		if (e.pageX || e.pageY){
+			x = e.pageX;
+			y = e.pageY;
+		} else if (e.clientX || e.clientY){
+			x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+			y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+		}
+		return {x: x, y: y}
+	};
 	// Menu
 	$(window).on("resize", function () {
   var positionTop = window.innerHeight / 2;
