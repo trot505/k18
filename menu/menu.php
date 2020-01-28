@@ -1,5 +1,5 @@
 <?php
-include_once("../fun.php");
+//include_once("../fun.php");
 $id = $_REQUEST['id'];
 $img_dir = "./images_menu/small/";
 $arr_small = array_values(array_diff(scandir($img_dir), ['..','.']));

@@ -88,10 +88,11 @@ $(document).ready(function() {
 	});
 	$('body').on('click','.content_close i',function (e) {
 		e.preventDefault();
-		$('#content_load').removeClass('active');
+		back_content(e);
+		/*$('#content_load').removeClass('active');
 		setTimeout(function () {
 			$('#content_load .content').html('');
-		},200);
+		},200);*/
 	});
 	$('body').on('click', '.menu_see', function (e) {
 		e.preventDefault();
@@ -239,10 +240,10 @@ let slider_img = function (id) {
 		setTimeout(function () {
 			back.toggleClass('active_back');
 			if (back.hasClass('active_back')){
-				$('body').addClass('overflow_hidden');
 				setTimeout(function () {
+					$('body').addClass('overflow_hidden');
 					back.html(content);
-				},600);
+				},500);
 			} else {
 				back.empty();
 				$('body').removeClass('overflow_hidden');
