@@ -82,191 +82,54 @@ $(document).ready(function() {
 		return false;
 	});	
 	// Start LYNX
-	$('body').on('click', '.galery', function (e) {
-		e.preventDefault();
-		$('#content_load').addClass('active');
-	});
+	
 	$('body').on('click','.content_close i',function (e) {
 		e.preventDefault();
-		back_content(e);
-		/*$('#content_load').removeClass('active');
-		setTimeout(function () {
-			$('#content_load .content').html('');
-		},200);*/
+		$('body').removeClass('overflow_hidden');
+		$('#full_box').css({'opacity':0});
+		setTimeout(() => {
+			$('#full_box').removeAttr('style');
+			$('#full_box .full_content').empty();
+		}, 420);
+		
 	});
-	$('body').on('click', '.menu_see', function (e) {
-		e.preventDefault();
-		$.post('/menu/menu.php',{id:'menu_gallery'}, function (data) {
-			let ret = $.parseJSON(data);
-			let lx_html = ret.html;
-			back_content(e, lx_html);
-				$('#content_load .content').html(ret.html);
+	
 
-				
-			setTimeout(function () {
-				//$('#content_load').addClass('active');
-				setTimeout(function () {
-					slider_img('#menu_gallery');
-				},100);
-			},300);
+	$('body').on('click', '.full_c', function (e) {
+		e.preventDefault();
 		
+		$('#full_box').css({'display':'grid'});
+		setTimeout(() => {
+			$('#full_box').css({'opacity':1});
+			$('body').addClass('overflow_hidden');
+		}, 50);
+		
+		$.post('/menu/menu_new.php',{id:'menu_gallery'}, function (data) {
+			let ret = $.parseJSON(data);
+			let err = ret.error;
+			let fc = ret.html;
+			setTimeout(() => {
+				if (!err) {
+					$('#full_box .full_content').html(fc);
+					$('#full_box .full_content .up_slider').fotorama({});
+				}
+			}, 400);
+			
 		});
-		
 	});
+
 	// end LYNX
 });	
 
-let slider_img = function (id) {
-	sliderWidth = $(id + ' .small_scroller').innerWidth();
-	let totalContent = 0;
-	
-	$(id + ' .small_scroller .img_content').each(function () {
-		totalContent += $(this).innerWidth();
-	});
-	if (sliderWidth > totalContent) $(id).css('justify-content', 'center');
-	$(id + ' .small_scroller .small_container').css('width',totalContent);
-	
-	$(id).mousemove(function(e){
-		if($(id + ' .small_scroller .small_container').width()>sliderWidth){
-			let mouseCoords=(e.pageX - this.offsetLeft);
-			let mousePercentX=mouseCoords/sliderWidth;
-			let destX=-(((totalContent-(sliderWidth))-sliderWidth)*(mousePercentX));
-			let thePosA=mouseCoords-destX;
-			let thePosB=destX-mouseCoords;
-			let animSpeed=600; //ease amount
-			let easeType='easeOutCirc';
-			
-			if(mouseCoords==destX){
-				$(id + ' .small_scroller .small_container').stop();
-			}
-			else if(mouseCoords>destX){
-				$(id + ' .small_scroller .small_container').stop().animate({left: -thePosA}, animSpeed,easeType);
-			}
-			else if(mouseCoords<destX){
-				$(id + ' .small_scroller .small_container').stop().animate({left: thePosB}, animSpeed,easeType);
-			}
-			
-		}
-	});
 
-	let fadeSpeed=300;
-	$(id + ' .small_scroller .small_container .img_content img').each(function () {
-		if (!$(this).hasClass('active_img')) $(this).fadeTo(fadeSpeed, 0.6);
-	});
-	
-	$(id + ' .small_scroller .small_container .img_content img').hover(
-	function(){ //mouse over
-		$(this).fadeTo(fadeSpeed, 1);
-	},
-	function(){ //mouse out
-		if (!$(this).hasClass('active_img')) $(this).fadeTo(fadeSpeed, 0.6);
-	});
-
-	$('body').on('click', id + ' .small_scroller .small_container .img_content img', function (e) {
-		let el = $(this);
-		let img_src = this.src.replace('small','full');
-		let full_img = $(id + ' .full_img img');
-		
-		$(id + ' .small_scroller .small_container .img_content').each(function () {
-			if ($(this).children('img').hasClass('active_img')) {
-				$(this).children('img').removeClass('active_img').fadeTo(fadeSpeed, 0.6);
-			}
-		});
-		el.addClass('active_img');
-		full_img.animate({opacity: 0}, fadeSpeed,'easeInOutQuad',function () {
-			$(this).attr('src', img_src);
-			setTimeout(function () {
-				full_img.animate({opacity: 1}, fadeSpeed,'easeInOutQuad');
-			},100);
-		});
-	});
-
-	$('body').on('click', id + ' .slide i', function (e) {
-		let par = $(this).parent('.slide');
-		let i = 0;
-		let add_c = 0;
-		let full_img = $(id + ' .full_img img');
-		let src_i;
-		let img_arr = $(id + ' .small_scroller .small_container .img_content img');
-
-		img_arr.each(function (key) {
-			if ($(this).hasClass('active_img')) i = key;
-		});
-		let l = img_arr.length - 1;
-		if (par.hasClass('slide_prev')){
-			if(i == 0){
-				src_i = img_arr[l].src;	
-				add_c = l;
-			} else {
-				src_i = img_arr[i].src;
-				add_c = i - 1;
-			}
-		} else if (par.hasClass('slide_next')) {
-			if(i == l) src_i = img_arr[0].src;	
-			else {
-				add_c = i + 1;
-				src_i = img_arr[add_c].src;
-			}
-		}
-		
-		src_i = src_i.replace('small','full');
-		$(img_arr[i]).removeClass('active_img');
-		$(img_arr[add_c]).addClass('active_img');
-		
-		full_img.animate({opacity: 0}, fadeSpeed,'easeInOutQuad',function () {
-			$(this).attr('src', src_i);
-			setTimeout(function () {
-				full_img.animate({opacity: 1}, fadeSpeed,'easeInOutQuad');
-			},100);
-		});
-		
-	});
-
-};
 	// Page Loader
 	setTimeout(function(){
 		$('body').addClass('loaded')
 	}, 1000);
 	
-	let back_content = function (el, lx_html = ''){
-		let content = '<div id="content_load"><div class="content_close"><i class="far fa-times-circle"></i></div><div class="content">' + lx_html + '</div></div>';
-		let с = getPosition(el);
-		let back = $('#back_content');
-		let width = back.width();
-		back.css({
-				'top' : с.y,
-				'left' : с.x,
-			})
-		setTimeout(function () {
-			back.toggleClass('active_back');
-			if (back.hasClass('active_back')){
-				setTimeout(function () {
-					$('body').addClass('overflow_hidden');
-					back.html(content);
-				},500);
-			} else {
-				back.empty();
-				$('body').removeClass('overflow_hidden');
-			}
-		},100)
-		
-		
-	};
+
 	
-	let getPosition = function (e){
-		let x = y = 0;
-		if (!e) {
-			let e = window.event;
-		}
-		if (e.pageX || e.pageY){
-			x = e.pageX;
-			y = e.pageY;
-		} else if (e.clientX || e.clientY){
-			x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-			y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-		}
-		return {x: x, y: y}
-	};
+	
 	// Menu
 	$(window).on("resize", function () {
   var positionTop = window.innerHeight / 2;
