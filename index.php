@@ -1,4 +1,5 @@
 <?php 
+header("Content-Type: text/html; charset=utf-8");
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -11,8 +12,6 @@
 <title>Горластый Гарри</title>
 <!-- CSS -->
 <link href="css/style.css" rel="stylesheet">
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
-<!--<script src="https://kit.fontawesome.com/2cc185786d.js" crossorigin="anonymous"></script>-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" integrity="sha384-REHJTs1r2ErKBuJB0fCK99gCYsVjwxHrSU0N7I1zl9vZbggVJXRMsv/sLlOAGb4M" crossorigin="anonymous">
 
 
@@ -26,9 +25,12 @@
 </div>
 <section id="full_box"><div class="content_close"><i class="fas fa-times"></i></div><div class="full_content"></div></section>
 
+<div class="fixed_delivery"><i class="fas fa-truck"></i></div>
+
 <div class="fixedcallicon">
 	<i class="fa fa-phone"></i><a href="tel:+73412775095">+7 (3412) 775-095</a>
 </div>
+
 <div class="container">
 	<section class="background">
 	<div class="content-wrapper">
@@ -70,39 +72,6 @@
 		<div class="pricingbadge">
 			<h4>МЕНЮ КУХНИ И БАРА</h4>
 			<h4>АКЦИИ</h4>
-			<!--<ul class="pricing_menu__list">
-				<li class="pricing_menu__row">
-				<div class="pricing_menu__meal">
-					<span>Haircut & Blowdry</span>
-				</div>
-				<span class="pricing_menu__price">$32.00</span>
-				</li>
-				<li class="pricing_menu__row">
-				<div class="pricing_menu__meal">
-					<span>Express Cut</span>
-				</div>
-				<span class="pricing_menu__price">$22.00</span>
-				</li>
-				<li class="pricing_menu__row">
-				<div class="pricing_menu__meal">
-					<span>Shampoo & Set</span>
-				</div>
-				<span class="pricing_menu__price">$19.00</span>
-				</li>
-				<li class="pricing_menu__row">
-				<div class="pricing_menu__meal">
-					<span>Bleach & Tone</span>
-				</div>
-				<span class="pricing_menu__price">$90.00</span>
-				</li>
-				<li class="pricing_menu__row">
-				<div class="pricing_menu__meal">
-					<span>Foil with Haircut</span>
-				</div>
-				<span class="pricing_menu__price">$43.00</span>
-				</li>
-				<a class="fullpricelist" href="#"><i class="fa fa-file-pdf-o"></i> View our full pricing list</a>
-			</ul>-->
 		</div>
 	</div>
 	</section>
@@ -119,15 +88,10 @@
 			<div class="contactform-bubble">
 				<form autocomplete="off" class="contactform" method="post" action="contact.php" id="contactform">
 					<h4>Для бронирования столика заполните форму.</h4>
-					<input name="name" type="text" placeholder="Ваше имя">
-					<input name="email" type="text" placeholder="E-mail">
-					<textarea name="comment" placeholder="Укажите на какую дату и время Вы планируете заказать столик." rows="4"></textarea>
+					<input name="name" type="text" maxlength="100" placeholder="Ваше имя" required>
+					<input name="phone" type="tel" maxlength="21" placeholder="Телефон" required>
+					<textarea name="comment" placeholder="Укажите на какую дату и время Вы планируете заказать столик." rows="4" required></textarea>
 					<input value="ОТПРАВИТЬ" type="submit" id="submit" class="btnsend">
-					<div class="done">
-						<div class="alert-box success">
-							<i>Message sent! We'll answer shortly.</i>
-						</div>
-					</div>
 				</form>
 			</div>
 			<div class="social-bubble">

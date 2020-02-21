@@ -242,7 +242,7 @@ a {text-decoration:none;color:#fff;}
     transition: all 1s ease;
 }
 .fixedcallicon i {width:60px;height:60px;text-align:center;}
-.fixedcallicon:hover {width:220px;background:var(--c-accent);color:var(--c-prim-o)}
+.fixedcallicon:hover {width:220px;background:var(--c-accent);color:var(--c-prim-o);}
 
 
 .intro h1 {font-family:Tavolga;font-size:150px;font-weight:400;line-height:1.1;}
@@ -607,16 +607,49 @@ a.fullpricelist {
 
 .contactform-bubble {
     display: inline-block;
+    position: relative;
     width: 400px;
     height: 400px;
     background: rgba(6, 6, 6, 0.5);
     color:var(--c-white);
     border-radius: 100%;
-	margin-left:-60px;	
+  margin-left:-60px;	
+  /*overflow: hidden;*/
 }
+.contactform-bubble .done {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background-color: var(--c-blue);
+  color: var(--c-prim);
+  font-size: 1.2em;
+  border-radius: 100%;
+  padding: 20px;
+  transition:all .65s ease-in-out;
+  -moz-transition:all .65s ease-in-out;
+  -webkit-transition:all .65s ease-in-out;
+  -o-transition:all .65s ease-in-out;
+}
+
+.contactform-bubble .done:first-child{
+  justify-self: center;
+  align-self: center;
+}
+.contactform-bubble .done.done_err {
+  background-color: var(--c-accent);
+  color: var(--c-white);
+}
+
 .contactform {
-	padding:20%;
+	padding:18%;
 }
+.contactform h4{margin-bottom: 5px;}
 .contactform input, 
 .contactform textarea{
 	width:100%;
@@ -624,7 +657,8 @@ a.fullpricelist {
 	border:0;
 	border-bottom:1px solid var(--c-white-o);
 	font-family:Tavolga;
-	padding:10px 0;
+  padding:10px 0;
+  margin-bottom: 5px;
   color:var(--c-option);
   resize: none;
 }
@@ -645,12 +679,12 @@ a.fullpricelist {
 	outline:none;
 	border-bottom:1px solid var(--c-option);
 }
-.done {
-    display: none;
-}
-.contactform .done {margin-top:10px; font-size:14px;color:rgba(53, 249, 214, 0.42);}
+
 .error input, input.error, .error textarea, textarea.error {
-    border-color: #c60f13;
+    background-color: var(--c-accent);
+    color: var(--c-prim);
+    border-radius: 5px 5px 0px 0px;
+    border-color: var(--c-accent);
 }
 
 .social-bubble {
@@ -1328,5 +1362,41 @@ body.overflow_hidden{overflow-y: hidden !important;}
   .content_close{top: 3px;right: 3px;}
   .content_close i{font-size: 1.2em;}
 }
+.full_content #y_map {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.full_content #y_map:first-child{
+  justify-self: center;
+  align-self: center;
+}
+
+.full_content iframe{
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.fixed_delivery {
+	background: rgba(0,0,0,0.5);
+  color: var(--c-accent);
+  position: fixed;
+  top: 35%;
+  left: -15px;
+  width: 75px;
+  height: 60px;
+  line-height: 60px;
+  overflow: hidden;
+  display: inline-block;
+  z-index: 99;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  transition: all .7s ease-in;
+}
+.fixed_delivery i {width:75px;height:60px;text-align:center;}
+.fixed_delivery:hover {left:0px;background:var(--c-accent);color:var(--c-prim-o);}
 
 /*end LYNX*/
